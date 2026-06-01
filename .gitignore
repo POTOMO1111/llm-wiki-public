@@ -1,0 +1,12 @@
+vault\wiki\articles\*
+!vault\wiki\articles\.gitkeep
+vault\wiki\concepts\*
+!vault\wiki\concepts\.gitkeep
+vault\wiki\entities\*
+!vault\wiki\entities\.gitkeep
+vault\wiki\papers\*
+!vault\wiki\papers\.gitkeep
+vault\wiki\queries\*
+!vault\wiki\queries\.gitkeep
+vault\wiki\sources\*
+!vault\wiki\sources\.gitkeep

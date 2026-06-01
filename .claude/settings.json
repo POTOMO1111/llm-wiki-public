@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Write(vault/wiki/**)",
+      "Write(.claude/**)",
+      "WebFetch(*)",
+      "WebSearch(*)"
+    ],
+    "deny": [
+      "Write(vault/raw/**)"
+    ]
+  }
+}
