@@ -13,19 +13,11 @@
 # to the outer repo — but we exclude it explicitly here regardless.
 # =============================================================================
 
-# Entire vault/ tree at repo root is user content.
-# (Leading slash anchors to root, so _skeleton/vault/ is NOT excluded.)
-/vault/
-
-# docs/ contains user-local setup material (PDFs, screenshots, source markdown).
-# The README now covers what new users need; docs/ is kept out of the public repo.
 /docs/
 
-# Local per-user Claude / Antigravity config (settings.json is the shared baseline)
 .claude/settings.local.json
 .antigravity/settings.local.json
 
-# OS / editor artifacts
 .DS_Store
 Thumbs.db
 *.swp
