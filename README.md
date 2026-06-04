@@ -8,36 +8,6 @@
 
 ---
 
-## ディレクトリ構成
-
-```
-llm-wiki/
-├── .claude/                 # Claude Code の設定とカスタムスキル
-│   ├── settings.json        # 権限設定（全ユーザー共通）
-│   └── skills/
-│       ├── ingest-paper/SKILL.md   # /ingest-paper コマンド
-│       ├── lint/SKILL.md           # /lint コマンド
-│       └── query/SKILL.md          # /query コマンド
-├── CLAUDE.md                # プロジェクト指示（wiki スキーマと運用ルール）
-├── README.md                # 本ファイル
-├── docs/
-│   └── setup-guide.pdf      # 詳細セットアップガイド
-├── _skeleton/               # 新規環境の初期構造テンプレ
-│   └── vault/               # vault/ にコピーして使う
-└── vault/                   # ユーザーのコンテンツ（.gitignore で除外）
-    ├── raw/                 # 未 ingest の PDF を投入
-    ├── ingested/            # ingest 済み PDF のアーカイブ（変更不可）
-    └── wiki/
-        ├── index.md         # コンテンツカタログ
-        ├── log.md           # 操作ログ
-        ├── overview.md      # 研究分野の俯瞰
-        ├── sources/         # 論文要約ページ（1 論文 = 1 ファイル）
-        ├── concepts/        # 概念ページ
-        └── entities/        # 著者・モデル・データセット・ベンチマークページ
-```
-
----
-
 ## クイックスタート
 
 ### 前提
@@ -54,14 +24,11 @@ llm-wiki/
 git clone git@github.com:POTOMO1111/llm-wiki-public.git my-wiki
 cd my-wiki/
 
-# 2. vault/ スケルトンをコピー
-cp -r _skeleton/vault ./vault     # macOS / Linux
-
-# Windows PowerShell の場合:
-# Copy-Item -Recurse _skeleton/vault ./vault
+# 2. vault/ スケルトンをコピー（vault/ が存在しなければ自動的に作成される）
+cp -r _skeleton/vault ./vault
 ```
 
-`vault/` が直下にできれば準備完了。
+`cp -r` は bash / zsh / Windows PowerShell いずれでも同じコマンドで動作する（PowerShell では `Copy-Item -Recurse` のエイリアス）。
 
 ### （任意）vault/ を独立 git リポジトリにする
 
@@ -109,6 +76,34 @@ Claude が `vault/wiki/index.md` を参照して関連ページを読み、引�
 
 ---
 
+## ディレクトリ構成
+
+```
+llm-wiki/
+├── .claude/                 # Claude Code の設定とカスタムスキル
+│   ├── settings.json        # 権限設定（全ユーザー共通）
+│   └── skills/
+│       ├── ingest-paper/SKILL.md   # /ingest-paper コマンド
+│       ├── lint/SKILL.md           # /lint コマンド
+│       └── query/SKILL.md          # /query コマンド
+├── CLAUDE.md                # プロジェクト指示（wiki スキーマと運用ルール）
+├── README.md                # 本ファイル
+├── _skeleton/               # 新規環境の初期構造テンプレ
+│   └── vault/               # vault/ にコピーして使う
+└── vault/                   # ユーザーのコンテンツ（.gitignore で除外）
+    ├── raw/                 # 未 ingest の PDF を投入
+    ├── ingested/            # ingest 済み PDF のアーカイブ（変更不可）
+    └── wiki/
+        ├── index.md         # コンテンツカタログ
+        ├── log.md           # 操作ログ
+        ├── overview.md      # 研究分野の俯瞰
+        ├── sources/         # 論文要約ページ（1 論文 = 1 ファイル）
+        ├── concepts/        # 概念ページ
+        └── entities/        # 著者・モデル・データセット・ベンチマークページ
+```
+
+---
+
 ## 設計思想
 
 - **論文を読むのは LLM、何を読ませるかを決めるのは人間。** ingest の判断と方向付けが人間側の主要な作業。
@@ -125,10 +120,9 @@ Claude が `vault/wiki/index.md` を参照して関連ページを読み、引�
 - `.claude/skills/ingest-paper/SKILL.md` — `/ingest-paper` の 9 ステップワークフロー
 - `.claude/skills/lint/SKILL.md` — `/lint` の検査項目
 - `.claude/skills/query/SKILL.md` — `/query` の合成ロジック
-- `docs/setup-guide.pdf` — スクリーンショット付きセットアップガイド（VSCode 拡張環境前提）
 
 ---
 
 ## ライセンス
 
-このフレームワーク（`.claude/`, `CLAUDE.md`, `_skeleton/`, `README.md`, `docs/`）はテンプレートとして自由に複製・改変・利用してください。ユーザーが `vault/` 配下に生成する wiki コンテンツの権利は完全にユーザーに帰属します。
+このフレームワーク（`.claude/`, `CLAUDE.md`, `_skeleton/`, `README.md`）はテンプレートとして自由に複製・改変・利用してください。ユーザーが `vault/` 配下に生成する wiki コンテンツの権利は完全にユーザーに帰属します。
