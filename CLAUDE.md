@@ -10,8 +10,14 @@ The human curates sources and asks questions. The LLM writes and maintains all w
 
 ```
 vault/
-├── raw/                      # Immutable source documents — NEVER modified by LLM
-│                             # Papers (.pdf), articles (.md), notes, etc. all placed here flat
+├── raw/                      # Pending ingest queue — files awaiting processing
+│                             # Drop new papers here. Contents are immutable.
+│                             # After /ingest-paper completes, the file is renamed to
+│                             # <slug>.<ext> and moved to vault/ingested/.
+├── ingested/                 # Archive of successfully ingested source files
+│                             # File names match their source page slugs:
+│                             # `vault/ingested/<slug>.<ext>` ↔ `vault/wiki/sources/<slug>.md`
+│                             # Append-only — never modified or removed after entering.
 └── wiki/                     # LLM-maintained wiki
     ├── index.md              # Content catalog — updated on every ingest
     ├── log.md                # Append-only operation log
@@ -20,6 +26,8 @@ vault/
     ├── concepts/             # Research concepts, methods, theories
     └── entities/             # Authors, institutions, datasets, models, benchmarks
 ```
+
+**Quick check for pending work**: anything still in `vault/raw/` is not yet ingested. `ls vault/raw/` answers "what's left?" without needing the LLM.
 
 ## Page Formats
 
@@ -137,7 +145,7 @@ Operations: `ingest`, `query`, `lint`
 
 ## LLM Behavioral Rules
 
-1. **Never modify vault/raw/** — treat everything there as immutable source of truth
+1. **Source file contents in `vault/raw/` and `vault/ingested/` are immutable**. Never edit file contents. The only allowed write is the **ingest hand-off**: at the end of `/ingest-paper`, rename `vault/raw/<original>.pdf` → `<slug>.pdf` and move it into `vault/ingested/<slug>.pdf`. Update the source page's `Raw file` field to point at the new path. `vault/ingested/` is otherwise append-only.
 2. **Always update index.md** after creating or significantly changing a wiki page
 3. **Always append to log.md** after each ingest, query, or lint pass
 4. **Prefer updating existing pages** over creating new ones for minor additions
@@ -157,7 +165,8 @@ Operations: `ingest`, `query`, `lint`
 5. Create or update entity pages (authors, datasets, models) introduced by the source
 6. Update vault/wiki/index.md
 7. Optionally update vault/wiki/overview.md if the source shifts the big picture
-8. Append an entry to vault/wiki/log.md
+8. **Rename the source file to `<slug>.<ext>` and move it from `vault/raw/` to `vault/ingested/`**, then update the source page's `Raw file` field to the new path
+9. Append an entry to vault/wiki/log.md
 
 ### Query (see `/query`)
 1. Read vault/wiki/index.md to find relevant pages

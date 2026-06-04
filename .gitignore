@@ -1,12 +1,30 @@
-vault\wiki\articles\*
-!vault\wiki\articles\.gitkeep
-vault\wiki\concepts\*
-!vault\wiki\concepts\.gitkeep
-vault\wiki\entities\*
-!vault\wiki\entities\.gitkeep
-vault\wiki\papers\*
-!vault\wiki\papers\.gitkeep
-vault\wiki\queries\*
-!vault\wiki\queries\.gitkeep
-vault\wiki\sources\*
-!vault\wiki\sources\.gitkeep
+# =============================================================================
+# llm-wiki / outer repository .gitignore
+# =============================================================================
+# This repo is the public framework (llm-wiki-public). The user's wiki content
+# lives under vault/, which is intentionally NOT tracked here:
+#   - vault/raw/        — user's pending PDFs
+#   - vault/ingested/   — user's archived PDFs (immutable source of truth)
+#   - vault/wiki/       — LLM-generated knowledge base (user-specific)
+#
+# New users bootstrap their vault/ by copying _skeleton/vault/ on first clone
+# (see README.md). If they choose to track vault/ in a separate content repo,
+# the nested .git inside vault/ also makes this directory effectively opaque
+# to the outer repo — but we exclude it explicitly here regardless.
+# =============================================================================
+
+# Entire vault/ tree at repo root is user content.
+# (Leading slash anchors to root, so _skeleton/vault/ is NOT excluded.)
+/vault/
+
+# Local per-user Claude config (settings.json is the shared baseline)
+.claude/settings.local.json
+
+# OS / editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*~
+*.tmp
+.vscode/
+.idea/
