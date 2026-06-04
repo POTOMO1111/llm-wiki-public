@@ -20,15 +20,9 @@
 ### セットアップ
 
 ```bash
-# 1. リポジトリを clone
-git clone git@github.com:POTOMO1111/llm-wiki-public.git my-wiki
-cd my-wiki/
-
-# 2. vault/ スケルトンをコピー（vault/ が存在しなければ自動的に作成される）
-cp -r _skeleton/vault ./vault
+# リポジトリを cloneするだけでOK!
+git clone git@github.com:POTOMO1111/llm-wiki-public.git
 ```
-
-`cp -r` は bash / zsh / Windows PowerShell いずれでも同じコマンドで動作する（PowerShell では `Copy-Item -Recurse` のエイリアス）。
 
 ### （任意）vault/ を独立 git リポジトリにする
 
