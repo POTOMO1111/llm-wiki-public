@@ -21,8 +21,9 @@
 # The README now covers what new users need; docs/ is kept out of the public repo.
 /docs/
 
-# Local per-user Claude config (settings.json is the shared baseline)
+# Local per-user Claude / Antigravity config (settings.json is the shared baseline)
 .claude/settings.local.json
+.antigravity/settings.local.json
 
 # OS / editor artifacts
 .DS_Store

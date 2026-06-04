@@ -1,3 +1,8 @@
+---
+name: lint
+description: Health-check the wiki to find contradictions, gaps, orphans, and stale content.
+---
+
 # Skill: lint
 
 Health-check the wiki: find contradictions, gaps, orphans, and stale content.

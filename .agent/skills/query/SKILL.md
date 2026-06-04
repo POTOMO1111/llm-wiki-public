@@ -1,3 +1,8 @@
+---
+name: query
+description: Answer a question against the wiki and optionally file the answer as a synthesis page.
+---
+
 # Skill: query
 
 Answer a question against the wiki and optionally file the answer as a synthesis page.

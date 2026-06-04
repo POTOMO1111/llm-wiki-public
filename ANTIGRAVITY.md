@@ -173,6 +173,7 @@ Operations: `ingest`, `query`, `lint`
 2. Read the relevant pages
 3. Synthesize an answer with citations ([[source-page]])
 4. If the answer is worth keeping, offer to save it as a synthesis page in vault/wiki/
+5. If not saved, still append a brief log entry
 
 ### Lint (see `/lint`)
 1. Read all pages via index.md

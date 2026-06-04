@@ -1,10 +1,15 @@
-# Skill: ingest-paper
+---
+name: ingest
+description: Ingest a source document from `vault/raw/` into the wiki.
+---
+
+# Skill: ingest
 
 Ingest a source document from `vault/raw/` into the wiki.
 
 ## Trigger
 
-`/ingest-paper [filename]`
+`/ingest [filename]`
 
 If `filename` is provided, process that file. If omitted, list available files in `vault/raw/` and ask the user which to ingest.
 
